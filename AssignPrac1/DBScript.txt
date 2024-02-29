@@ -1,0 +1,158 @@
+﻿﻿CREATE TABLE OrganizationType
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Type] VARCHAR(50) NULL
+)
+GO
+
+INSERT INTO OrganizationType VALUES('Farm')
+INSERT INTO OrganizationType VALUES('Zoo')
+INSERT INTO OrganizationType VALUES('Sanctuary')
+GO
+
+CREATE TABLE Organization (
+    [Organization_Id] INT IDENTITY (1, 1) NOT NULL  PRIMARY KEY,
+    [Name] VARCHAR (50) NULL,
+    [Address] VARCHAR (50) NULL,
+    [Type_Id] INT NULL, 
+    CONSTRAINT [FK_Organization_ToTable] FOREIGN KEY ([Type_Id]) REFERENCES [OrganizationType]([Id])    
+)
+GO
+
+INSERT INTO Organization VALUES('Mike's Animal Farm', 'Cansas', 1)
+INSERT INTO Organization VALUES('Callipur Animal Zoo', 'Kentucky', 2)
+GO
+
+CREATE TABLE Species
+(
+    [Species_Id]  INT IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+    [Name] VARCHAR (50) NULL,
+    [Description] TEXT NULL
+)
+GO
+
+INSERT INTO Species VALUES('Mammals', 'Mammals are group of vertibrate animals characterized by their ability to provide milk to feed their young.')
+INSERT INTO Species VALUES('Reptiles', 'Reptiles are any member of the class Reptilia, the group of air-breathing vertebrates that have internal fertilization, amniotic development, and epidermal scales covering part or all of their body.')
+INSERT INTO Species VALUES('Birds','Birds are warm-blooded vertebrates more related to reptiles than to mammals and that they have a four-chambered heart (as do mammals). They even have feathers, the major characteristic that distinguishes them from all other animals.')
+GO
+
+CREATE TABLE Animal
+(
+	[Animal_Id] INT NOT NULL identity(1,1) PRIMARY KEY, 
+    [Name] VARCHAR(50) NULL, 
+    [Age] VARCHAR(50) NULL, 
+    [Gender] VARCHAR(50) NULL, 
+	[Weight] INT NULL,
+	[Height] INT NULL,
+    [Species_Id] INT NULL, 
+    [Organization_Id] INT NULL, 
+    CONSTRAINT [FK_Species_Id] FOREIGN KEY (Species_Id) REFERENCES Species(Species_Id), 
+    CONSTRAINT [FK_Org_ID] FOREIGN KEY (Organization_Id) REFERENCES Organization(Organization_Id)
+)
+GO
+
+INSERT INTO Animal VALUES('Leo', '12', 'Male', 180, 6, 1, 2)
+INSERT INTO Animal VALUES('Elephant', '17', 'Male', 2000, 4, 1, 2)
+
+CREATE TABLE Meal
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Name] VARCHAR(50) NULL, 
+    [Unit_In_Gram] VARCHAR(50) NULL, 
+    [Caloriers] FLOAT NULL
+)
+GO
+
+CREATE TABLE Exercise (
+    [Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+    [Name] VARCHAR (50) NULL,
+    [Time]          VARCHAR(50)          NULL,
+    [Calories_Burn] FLOAT          NULL,
+    [Exercise_Type] VARCHAR(50) NULL     
+)
+GO
+
+CREATE TABLE Staff (
+    [Staff_Id] INT IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+    [Name] VARCHAR (50) NULL,
+    [Age] VARCHAR (50) NULL,
+    [Designation] VARCHAR (50) NULL, 
+    [Org_Id] INT NULL, 
+    CONSTRAINT [FK_Staff_ToTable] FOREIGN KEY (Org_Id) REFERENCES Organization(Organization_Id)    
+)
+GO
+
+INSERT INTO Staff VALUES('John', '30', 'Care Taker', 1)
+INSERT INTO Staff VALUES('Mark', '42', 'Care Taker', 2)
+
+CREATE TABLE Course
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Start_Date] DATETIME NULL, 
+    [End_Date] DATETIME NULL, 
+    [Animal_Id] INT NULL, 
+    [Staff_id] INT NULL, 
+    [Goal] VARCHAR(50) NULL, 
+    [BMI] DECIMAL NULL, 
+    CONSTRAINT [FK_AnimalID_ToTable] FOREIGN KEY ([Animal_Id]) REFERENCES [Animal]([Animal_Id]), 
+    CONSTRAINT [Staff_Id] FOREIGN KEY ([Staff_Id]) REFERENCES [Staff]([Staff_Id]), 
+	   
+)
+
+CREATE TABLE Activity
+(
+	[Activity_Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Name] VARCHAR(50) NULL      
+)
+GO
+
+INSERT INTO activity VALUES('Active')
+INSERT INTO activity VALUES('Moderately Active')
+INSERT INTO activity VALUES('Inactive')
+GO
+
+CREATE TABLE Daily_Log
+(
+	[Log_Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,            
+    [Course_Id] int NULL,
+    [Activity_Id] INT NULL, 
+    [Date] DATE NULL, 
+    [Progress] VARCHAR(100),
+    CONSTRAINT [FK_Activity] FOREIGN KEY (Activity_Id) REFERENCES [Activity]([Activity_Id]),
+    CONSTRAINT [FK_course] FOREIGN KEY (Course_Id) REFERENCES [Course]([Id])
+)
+GO
+
+CREATE TABLE Daily_Meal
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,  
+    [Log_Id] INT NULL, 
+    [Meal_Id] INT NULL, 
+    [Meal_Intake] DECIMAL NULL, 
+    CONSTRAINT [FK_Log] FOREIGN KEY (Log_Id) REFERENCES [Daily_Log]([Log_Id]),
+    CONSTRAINT [FK_meal] FOREIGN KEY (Meal_Id) REFERENCES [Meal]([Id])
+)
+GO
+
+CREATE TABLE Daily_Measurement
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Log_Id] INT NULL, 
+    [Waist_Size] INT NULL,
+    [Weight] DECIMAL NULL,
+    [Shift] VARCHAR(50) NULL, 
+	[DOM] DATE NULL,  
+    CONSTRAINT [FK_DLog] FOREIGN KEY (Log_Id) REFERENCES [Daily_Log]([Log_Id])
+)
+GO
+
+CREATE TABLE Daily_Exercise
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Log_Id] INT NULL, 
+    [Time] VARCHAR(50) NULL, 
+    [Exercise_Id] INT NULL, 
+    CONSTRAINT [FK_DayLog] FOREIGN KEY (Log_Id) REFERENCES [Daily_Log]([Log_Id]),
+    CONSTRAINT [FK_Excercise] FOREIGN KEY (Exercise_Id) REFERENCES [Exercise]([Id])
+)
+GO

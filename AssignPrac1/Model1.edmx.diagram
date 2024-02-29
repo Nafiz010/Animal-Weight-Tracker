@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="55a0a6600ef64e5497641ae6c626026b" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Activity" Width="1.5" PointX="10.5" PointY="2.25" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Animal" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Course" Width="1.5" PointX="10.5" PointY="5.625" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Daily_Exercise" Width="1.5" PointX="15" PointY="6" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Daily_Log" Width="1.5" PointX="12.75" PointY="5.625" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Daily_Meal" Width="1.5" PointX="15" PointY="3" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Daily_Measurement" Width="1.5" PointX="15" PointY="11.75" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Exercise" Width="1.5" PointX="12.75" PointY="10" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Meal" Width="1.5" PointX="12.75" PointY="2.125" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Organization" Width="1.5" PointX="3" PointY="5.875" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.OrganizationType" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Species" Width="1.5" PointX="6" PointY="3.125" />
+        <EntityTypeShape EntityType="AnimalWeightTrackerModel.Staff" Width="1.5" PointX="5.25" PointY="5.875" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Activity" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_AnimalID_ToTable" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Org_ID" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Species_Id" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_course" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.Staff_Id" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_DayLog" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Excercise" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_DLog" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Log" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_meal" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Organization_ToTable" />
+        <AssociationConnector Association="AnimalWeightTrackerModel.FK_Staff_ToTable" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
